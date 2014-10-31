@@ -1,4 +1,4 @@
-this is what needs to be done to my understanding:
+This is what needs to be done to my understanding:
 
     linear file database:
         allocate         - Andrew
