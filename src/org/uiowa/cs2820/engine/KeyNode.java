@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class KeyNode implements Serializable{
 	protected Field key;
+	public int addr;
 	public int prev;
 	public int next;
 	public int value;
@@ -15,6 +16,7 @@ public class KeyNode implements Serializable{
 		this(f,p,n,-1);
 	}
 	KeyNode(Field f, int p, int n, int v){
+		addr = -1;
 		key = f;
 		prev = p;
 		next = n;

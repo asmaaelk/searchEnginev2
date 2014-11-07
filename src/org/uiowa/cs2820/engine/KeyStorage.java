@@ -12,25 +12,38 @@ public class KeyStorage {
 	}
 	protected KeyNode head(){return read(0);}
 	
+	protected void write(int area, KeyNode node) throws IOException{
+		if(node != null){
+			node.addr = area;
+			Allocate.allocate(area);
+		}
+		DiscSpace.write(area,node);
+	}
+	protected int write(KeyNode node) throws IOException{
+		int addr = Allocate.allocate();
+		write(addr,node);
+		return addr;
+	}
+	
 	public KeyNode add(Field f) throws IOException{
 		KeyNode head = head();
 		if(head == null){
 			KeyNode node = new KeyNode(f);
-			DiscSpace.write(0,node);
+			write(0,node);
 			return node;
 		}else{
 			KeyNode node = new KeyNode(f,0,head.next);
-			int addr = DiscSpace.write(node);
+			int addr = write(node);
 			
 			if(head.next != -1){
 				KeyNode sec = read(head.next);
 				if(sec == null) throw new IOException();
 				sec.prev = addr;
-				DiscSpace.write(head.next, sec);
+				write(head.next, sec);
 			}
 			
 			head.next = addr;
-			DiscSpace.write(0,head);
+			write(0,head);
 			
 			return node;
 		}
@@ -60,18 +73,18 @@ public class KeyStorage {
 		
 		if(node.prev == -1){
 			if(node.next == -1){
-				DiscSpace.write(0, null);
+				write(0, null);
 				return;
 			}
 			
 			KeyNode sec = read(node.next);
 			sec.prev = -1;
-			DiscSpace.write(0, sec);
+			write(0, sec);
 			
 			if(sec.next != -1){
 				KeyNode thr = read(sec.next);
 				thr.prev = 0;
-				DiscSpace.write(sec.next, thr);
+				write(sec.next, thr);
 			}
 			return;
 		}
@@ -79,14 +92,16 @@ public class KeyStorage {
 		KeyNode prev = read(node.prev);
 		if(prev == null) throw new IOException();
 		prev.next = node.next;
-		DiscSpace.write(node.prev, prev);
+		write(node.prev, prev);
 		
 		if(node.next != -1){
 			KeyNode next = read(node.next);
 			if(next == null) throw new IOException();
 			next.prev = node.prev;
-			DiscSpace.write(node.next, next);
+			write(node.next, next);
 		}
+		
+		Allocate.free(node.addr);
 	}
 	
 	public ArrayList<Field> getKeys() throws IOException{
@@ -95,6 +110,7 @@ public class KeyStorage {
 		
 		if(temp == null) return keys;
 		while(true){
+			System.out.println(temp.addr);
 			keys.add(temp.getKey());
 			if(temp.next == -1) return keys;
 			temp = read(temp.next);
