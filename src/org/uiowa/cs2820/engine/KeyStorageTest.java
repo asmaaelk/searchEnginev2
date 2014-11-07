@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -16,7 +17,7 @@ public class KeyStorageTest {
 	public Field f3 = new Field("someFieldName3","someFieldValue3");
 	
 	@Before
-	public void before(){
+	public void before() throws IOException{
 		ks = new KeyStorage();
 		assertEquals(0,ks.getKeys().size());
 	}
@@ -29,7 +30,7 @@ public class KeyStorageTest {
 	}
 	
 	@Test
-	public void testAdd(){
+	public void testAdd() throws IOException{
 		ks.add(f1);
 		ks.add(f2);
 		ks.add(f3);
@@ -43,7 +44,7 @@ public class KeyStorageTest {
 	}
 	
 	@Test
-	public void testFind(){
+	public void testFind() throws IOException{
 		ks.add(f1);
 		assertNotNull(ks.find(f1));
 		assertNull(ks.find(f2));
@@ -51,7 +52,7 @@ public class KeyStorageTest {
 	}
 	
 	@Test
-	public void testKey(){
+	public void testKey() throws IOException{
 		ks.add(f1);
 		assertNotNull(ks.key(f1));
 		assertNotNull(ks.key(f2));
@@ -59,7 +60,7 @@ public class KeyStorageTest {
 	}
 	
 	@Test
-	public void testDelete(){
+	public void testDelete() throws IOException{
 		ks.add(f1);
 		ks.add(f2);
 		ks.add(f3);
@@ -79,15 +80,15 @@ public class KeyStorageTest {
 	}
 	
 	@Test
-	public void testGetKeys(){
+	public void testGetKeys() throws IOException{
 		ks.add(f1);
 		ks.add(f3);
 		
 		ArrayList<Field> keys = ks.getKeys();
-		assertEquals(3,keys.size());
-		assertTrue (keys.contains(f1));
-		assertFalse(keys.contains(f2));
-		assertTrue (keys.contains(f3));
+		assertEquals(keys.toString(),2,keys.size());
+		assertTrue (keys.toString(),keys.contains(f1));
+		assertFalse(keys.toString(),keys.contains(f2));
+		assertTrue (keys.toString(),keys.contains(f3));
 	}
 
 }

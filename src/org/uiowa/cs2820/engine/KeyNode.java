@@ -1,6 +1,8 @@
 package org.uiowa.cs2820.engine;
 
-public class KeyNode {
+import java.io.Serializable;
+
+public class KeyNode implements Serializable{
 	protected Field key;
 	public int prev;
 	public int next;
@@ -8,6 +10,9 @@ public class KeyNode {
 	
 	KeyNode(Field f){
 		this(f,-1,-1,-1);
+	}
+	KeyNode(Field f, int p, int n){
+		this(f,p,n,-1);
 	}
 	KeyNode(Field f, int p, int n, int v){
 		key = f;
@@ -17,7 +22,7 @@ public class KeyNode {
 	}
 	
 	public boolean match(Field f){
-		return key.getFieldName().equals(f.getFieldName()) && key.getFieldValue().equals(f.getFieldValue());
+		return key.equals(f);
 	}
 	
 	public Field getKey(){

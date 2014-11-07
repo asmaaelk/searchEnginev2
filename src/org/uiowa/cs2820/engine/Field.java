@@ -62,4 +62,10 @@ public class Field implements Serializable {
 	  //System.arraycopy(FieldValue,0,R,ByteFieldName.length,FieldValue.length);
 	  //return R;
 	  }
+	public boolean equals(Object o){
+		if(o == null) return false;
+		if(!(o instanceof Field)) return false;
+		Field f = (Field)o;
+		return f.FieldName.equals(FieldName) && f.FieldValue.equals(FieldValue);
+	}
 	}
