@@ -35,9 +35,59 @@ public class KeyStorage {
 			return node;
 		}
 	}
-	public KeyNode find(Field f){return null;}
-	public KeyNode key(Field f){return null;}
-	public KeyNode delete(Field f){return null;}
+	
+	public KeyNode find(Field f) throws IOException{
+		KeyNode temp = head();
+		if(temp == null) return null;
+		
+		while(true){
+			if(temp.match(f)) return temp;
+			if(temp.next == -1) return null;
+			temp = read(temp.next);
+			if(temp == null) throw new IOException();
+		}
+	}
+	
+	public KeyNode key(Field f) throws IOException{
+		KeyNode node = find(f);
+		if(node == null) return add(f);
+		else return node;
+	}
+	
+	public void delete(Field f) throws IOException{
+		KeyNode node = find(f);
+		if(node == null) return;
+		
+		if(node.prev == -1){
+			if(node.next == -1){
+				DiscSpace.write(0, null);
+				return;
+			}
+			
+			KeyNode sec = read(node.next);
+			sec.prev = -1;
+			DiscSpace.write(0, sec);
+			
+			if(sec.next != -1){
+				KeyNode thr = read(sec.next);
+				thr.prev = 0;
+				DiscSpace.write(sec.next, thr);
+			}
+			return;
+		}
+		
+		KeyNode prev = read(node.prev);
+		if(prev == null) throw new IOException();
+		prev.next = node.next;
+		DiscSpace.write(node.prev, prev);
+		
+		if(node.next != -1){
+			KeyNode next = read(node.next);
+			if(next == null) throw new IOException();
+			next.prev = node.prev;
+			DiscSpace.write(node.next, next);
+		}
+	}
 	
 	public ArrayList<Field> getKeys() throws IOException{
 		KeyNode temp = head();

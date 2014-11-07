@@ -19,14 +19,15 @@ public class KeyStorageTest {
 	@Before
 	public void before() throws IOException{
 		ks = new KeyStorage();
-		assertEquals(0,ks.getKeys().size());
+		assertEquals(ks.getKeys().toString(),0,ks.getKeys().size());
 	}
 	
 	@After
-	public void after(){
+	public void after() throws IOException{
 		ks.delete(f1);
 		ks.delete(f2);
 		ks.delete(f3);
+		assertEquals(ks.getKeys().toString(),0,ks.getKeys().size());
 	}
 	
 	@Test
@@ -77,6 +78,9 @@ public class KeyStorageTest {
 		assertNull   (ks.find(f1));
 		assertNotNull(ks.find(f2));
 		assertNull   (ks.find(f3));
+		
+		ks.delete(f2);
+		assertEquals(0,ks.getKeys().size());
 	}
 	
 	@Test
