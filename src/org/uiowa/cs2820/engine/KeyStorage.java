@@ -7,7 +7,7 @@ public class KeyStorage {
 	public KeyStorage(){}
 	
 	protected KeyNode read(int area){
-		try{return (KeyNode)DiskSpace.read(area);}
+		try{return (KeyNode)DiscSpace.read(area);}
 		catch(IOException e){return null;}
 	}
 	protected KeyNode head(){return read(0);}
@@ -17,7 +17,7 @@ public class KeyStorage {
 			node.addr = area;
 			Allocate.allocate(area);
 		}
-		DiskSpace.write(area,node);
+		DiscSpace.write(area,node);
 	}
 	protected int write(KeyNode node) throws IOException{
 		int addr = Allocate.allocate();
@@ -100,6 +100,8 @@ public class KeyStorage {
 			next.prev = node.prev;
 			write(node.next, next);
 		}
+		
+		node.getValueStorage().delete();
 		
 		Allocate.free(node.addr);
 	}

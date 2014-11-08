@@ -30,4 +30,8 @@ public class KeyNode implements Serializable{
 	public Field getKey(){
 		return key;
 	}
+	
+	public ValueStorage getValueStorage(){
+		return new ValueStorage(value);
+	}
 }
