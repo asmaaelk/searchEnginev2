@@ -6,18 +6,18 @@ import java.util.BitSet;
 //1 used
 
 public class Allocate{
-	private BitSet theBitSet = new BitSet();
+	private static BitSet theBitSet = new BitSet();
 	
-	public int allocate(){
+	public static int allocate(){
 		int firstzero =  theBitSet.nextClearBit(0);
 		return firstzero;
 	}
 	
-	public void allocate(int area){
+	public static void allocate(int area){
 		theBitSet.set(area);
 		
 	}
-	public void free(int area){
+	public static void free(int area){
 		theBitSet.clear(area);
 		return;
 	}
