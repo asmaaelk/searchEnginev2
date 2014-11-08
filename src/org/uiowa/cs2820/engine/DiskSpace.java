@@ -1,27 +1,27 @@
 /*SOURCE:
     http://examples.javacodegeeks.com/core-java/io/randomaccessfile/java-randomaccessfile-example/
 */
-package com.javacodegeeks.java.core;
+package org.uiowa.cs2820.engine;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class RandomAccessFileEx {
-
-	static final String FILEPATH = "C:/Users/nikos7/Desktop/input.txt";
-
+/*
+This is a working IMPLEMENTATION from link provided at top. 
+To implement, change the filepath as needed.
+static final String FILEPATH = "C:/Users/USER_NAME/just_a_path/input.txt";
 	public static void main(String[] args) {
-
 		try {
 
 			System.out.println(new String(readFromFile(FILEPATH, 150, 23)));
 
-			writeToFile(FILEPATH, "JavaCodeGeeks Rocks!", 22);
+			writeToFile(FILEPATH, "Object-Oriented  Rocks!", 22);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 
 	private static byte[] readFromFile(String filePath, int position, int size)
 			throws IOException {
@@ -33,7 +33,7 @@ public class RandomAccessFileEx {
 		file.close();
 		return bytes;
 
-	}
+	}//End read
 
 	private static void writeToFile(String filePath, String data, int position)
 			throws IOException {
@@ -43,5 +43,5 @@ public class RandomAccessFileEx {
 		file.write(data.getBytes());
 		file.close();
 
-	}
-}
+	}//End write
+}//End DiskSpace()
