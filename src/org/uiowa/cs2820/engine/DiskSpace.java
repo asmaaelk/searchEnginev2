@@ -10,6 +10,7 @@ public class RandomAccessFileEx {
 /*
 This is a working IMPLEMENTATION from link provided at top. 
 To implement, change the filepath as needed.
+
 static final String FILEPATH = "C:/Users/USER_NAME/just_a_path/input.txt";
 	public static void main(String[] args) {
 		try {
