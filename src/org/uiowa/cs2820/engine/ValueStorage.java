@@ -1,6 +1,5 @@
 package org.uiowa.cs2820.engine;
 
-import java.util.ArrayList;
 import java.util.*;
 
 public class ValueStorage implements Value {
