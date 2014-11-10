@@ -9,13 +9,8 @@ import java.io.RandomAccessFile;
 
 /*
 This is a working IMPLEMENTATION from link provided at top. 
-To implement, change the filepath as needed.*/
+To implement, change the filepath as needed.
 
-public class RandomAccessFileEx {
-	private static File file;
-	private static String filePath;
-
-/*
 static final String FILEPATH = "C:/Users/USER_NAME/just_a_path/input.txt";
 	public static void main(String[] args) {
 		try {
@@ -28,6 +23,10 @@ static final String FILEPATH = "C:/Users/USER_NAME/just_a_path/input.txt";
 		}
 
 	}*/
+
+public class RandomAccessFileEx {
+	private static File file;
+	private static String filePath;
 
 	/*private static byte[] readFromFile(String filePath, int position, int size) throws IOException {
 	private static byte[] read(long area) throws IOException{
