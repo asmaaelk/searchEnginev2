@@ -1,8 +1,5 @@
-/*Credit:
+/*SOURCE:
     http://examples.javacodegeeks.com/core-java/io/randomaccessfile/java-randomaccessfile-example/
- 
- RandomAccessFile.readFully() method docs:
-   http://www.tutorialspoint.com/java/io/randomaccessfile_readfully_byte.htm
 */
 package org.uiowa.cs2820.engine;
 
@@ -12,15 +9,27 @@ import java.io.RandomAccessFile;
 
 /*
 This is a working IMPLEMENTATION from link provided at top. 
-To implement, change the filepath as needed.
+To implement, change the filepath as needed.*/
 
-Food for thought.
-*/
+public class DiskSpace {
+	private static File file;
+	private static String filePath;
 
-	/*
-Previous implementation of read:
+/*
+static final String FILEPATH = "C:/Users/USER_NAME/just_a_path/input.txt";
+	public static void main(String[] args) {
+		try {
 
-	private static byte[] readFromFile(String filePath, int position, int size) throws IOException {
+			System.out.println(new String(readFromFile(FILEPATH, 150, 23)));
+
+			writeToFile(FILEPATH, "Object-Oriented  Rocks!", 22);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}*/
+
+	/*private static byte[] readFromFile(String filePath, int position, int size) throws IOException {
 	private static byte[] read(long area) throws IOException{
 		
 		RandomAccessFile file = new RandomAccessFile(filePath, "rw");
@@ -30,30 +39,23 @@ Previous implementation of read:
 		file.close();
 		return bytes;
 
-	}//End read
-	*/
-	
-public class RandomAccessFileEx {
-	private static File file;
-	private static String filePath;
-
-	private static byte[] read(long area) throws IOException{
+	}//End read*/
+	public byte[] read(long area) throws IOException{
 		
-		RandomAccessFile randFile = new RandomAccessFile(filePath, "r"); //Constructor: What to read
-		byte[] bytes = new byte[DiskSpace.getFileSize()];                //How much to read
-		randFile.seek(area);                                             //Searching
-		randFile.readFully(bytes);                                       //Reads up to 'bytes'
-		randFile.close();                                                //Close file
-		return bytes;                                                    //So we know where to write!
+		RandomAccessFile randFile = new RandomAccessFile(filePath, "rw");
+		byte[] bytes = new byte[DiskSpace.getFileSize()];
+		randFile.seek(area*1024);
+		randFile.readFully(bytes);
+		randFile.close();
+		return bytes;
 		
 	}
 
-	private static void writeToFile(String filePath, String data, int position)
-			throws IOException {
-
-		RandomAccessFile file = new RandomAccessFile(filePath, "rw"); //Same as above, but with write option
-		file.seek(position);
-		file.write(data.getBytes());
+	//private static void writeToFile(String filePath, String data, int position) throws IOException {
+	public static void write(Object O, long area) throws IOException{
+		RandomAccessFile file = new RandomAccessFile(filePath, "rw");
+		file.seek(area*1024);
+		//file.write(data.getBytes());
 		file.close();
 
 	}
