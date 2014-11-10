@@ -5,8 +5,10 @@ import java.util.ArrayList;
 public class Node {
   // Node is a basic unit in the database
   byte[] Key;  // Key of this node for lookup
+  int valHead;
+  
   ArrayList<String> Identifiers;
-  int size;    // not yet implemented
+ // int size;     not yet implemented
   
   Node(byte[] f, String id) {
 	this.Key = f;

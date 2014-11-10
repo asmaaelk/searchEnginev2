@@ -15,32 +15,7 @@ public class DiskSpace {
 	private static File file;
 	private static String filePath;
 
-/*
-static final String FILEPATH = "C:/Users/USER_NAME/just_a_path/input.txt";
-	public static void main(String[] args) {
-		try {
-
-			System.out.println(new String(readFromFile(FILEPATH, 150, 23)));
-
-			writeToFile(FILEPATH, "Object-Oriented  Rocks!", 22);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}*/
-
-	/*private static byte[] readFromFile(String filePath, int position, int size) throws IOException {
-	private static byte[] read(long area) throws IOException{
-		
-		RandomAccessFile file = new RandomAccessFile(filePath, "rw");
-		file.seek(position);
-		byte[] bytes = new byte[size];
-		file.read(bytes);
-		file.close();
-		return bytes;
-
-	}//End read*/
-	public byte[] read(long area) throws IOException{
+	public static byte[] read(long area) throws IOException{
 		
 		RandomAccessFile randFile = new RandomAccessFile(filePath, "rw");
 		byte[] bytes = new byte[DiskSpace.getFileSize()];
@@ -51,7 +26,6 @@ static final String FILEPATH = "C:/Users/USER_NAME/just_a_path/input.txt";
 		
 	}
 
-	//private static void writeToFile(String filePath, String data, int position) throws IOException {
 	public static void write(Object O, long area) throws IOException{
 		RandomAccessFile file = new RandomAccessFile(filePath, "rw");
 		file.seek(area*1024);

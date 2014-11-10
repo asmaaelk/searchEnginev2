@@ -1,24 +1,23 @@
 package org.uiowa.cs2820.engine;
 
+import java.io.IOException;
 import java.util.*;
 
-public class ValueStorage implements Value throws IOException {
+public class ValueStorage implements Value{
 	
 	public static int head;
 	public static int size;
-	
 	public String identifier;
 	public static long tail;
 	
 	
-	
-	public ArrayList<String> load(int id) {
+	public ArrayList<String> load(long id) throws IOException{
 		ArrayList<String> nL = new ArrayList<String>();
-		byte[] fileName = DiskSpace.readFromFile(id);
+		byte[] fileName = DiskSpace.read(id);
 		return nL;
 	}
 
-	public void add(String identifier, Node n) throws {
+	public void add(String identifier, Node n) throws IOException {
 		n.valHead = Allocate.allocate();
 		this.identifier = identifier;
 		DiskSpace.write(this, 25);
