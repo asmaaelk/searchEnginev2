@@ -18,6 +18,7 @@ public class ValueStorage implements Value{
 	}
 
 	public void add(String identifier, Node n) throws IOException {
+		head = n.valHead;
 		n.valHead = Allocate.allocate();
 		this.identifier = identifier;
 		DiskSpace.write(this, 25);
