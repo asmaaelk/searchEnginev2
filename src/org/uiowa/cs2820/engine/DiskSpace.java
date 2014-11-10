@@ -22,13 +22,13 @@ static final String FILEPATH = "C:/Users/USER_NAME/just_a_path/input.txt";
 			e.printStackTrace();
 		}
 
-	}*/
+	}
 
-public class RandomAccessFileEx {
-	private static File file;
-	private static String filePath;
+Just food for thought ;)
+*/
 
-	/*private static byte[] readFromFile(String filePath, int position, int size) throws IOException {
+	/*
+	private static byte[] readFromFile(String filePath, int position, int size) throws IOException {
 	private static byte[] read(long area) throws IOException{
 		
 		RandomAccessFile file = new RandomAccessFile(filePath, "rw");
@@ -38,22 +38,28 @@ public class RandomAccessFileEx {
 		file.close();
 		return bytes;
 
-	}//End read*/
+	}//End read
+	*/
+	
+public class RandomAccessFileEx {
+	private static File file;
+	private static String filePath;
+
 	private static byte[] read(long area) throws IOException{
 		
-		RandomAccessFile randFile = new RandomAccessFile(filePath, "rw");
-		byte[] bytes = new byte[DiskSpace.getFileSize()];
-		randFile.seek(area);
-		randFile.readFully(bytes);
-		randFile.close();
-		return bytes;
+		RandomAccessFile randFile = new RandomAccessFile(filePath, "r"); //Constructor: What to read
+		byte[] bytes = new byte[DiskSpace.getFileSize()];                //How much to read
+		randFile.seek(area);                                             //Searching
+		randFile.readFully(bytes);                                       //???
+		randFile.close();                                                //Close file
+		return bytes;                                                    //So we know where to write!
 		
 	}
 
 	private static void writeToFile(String filePath, String data, int position)
 			throws IOException {
 
-		RandomAccessFile file = new RandomAccessFile(filePath, "rw");
+		RandomAccessFile file = new RandomAccessFile(filePath, "rw"); //Same as above, but with write option
 		file.seek(position);
 		file.write(data.getBytes());
 		file.close();
