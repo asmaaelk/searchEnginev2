@@ -94,5 +94,22 @@ public class KeyStorageTest {
 		assertFalse(keys.toString(),keys.contains(f2));
 		assertTrue (keys.toString(),keys.contains(f3));
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testIllegalAdd() throws IOException{
+		ks.add(null);
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testIllegalFind() throws IOException{
+		ks.find(null);
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testIllegalKey() throws IOException{
+		ks.key(null);
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testIllegalDelete() throws IOException{
+		ks.delete(null);
+	}
 
 }
