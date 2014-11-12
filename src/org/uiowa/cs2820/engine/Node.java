@@ -6,6 +6,7 @@ public class Node {
   // Node is a basic unit in the database
   byte[] Key;  // Key of this node for lookup
   int valHead;
+  int valTail = -1;
   
   ArrayList<String> Identifiers;
  // int size;     not yet implemented
@@ -25,7 +26,7 @@ public class Node {
 	Identifiers.remove(id);
     }
   
-  public int getSize() {
+ /* public int getSize() {
 	return size;
-    }
+    }*/
   }

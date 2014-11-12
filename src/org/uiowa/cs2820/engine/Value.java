@@ -5,7 +5,6 @@ import java.util.*;
 
 public interface Value {
 	public void add(String identifier, Node n) throws IOException;
-	public void delete(String identifier);
-	public void delete();
+
 	public ArrayList<String> load(long id) throws IOException;
 }
