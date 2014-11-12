@@ -1,5 +1,8 @@
 package org.uiowa.cs2820.engine;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class FieldSearch {
 	
   private Database D;
@@ -8,12 +11,10 @@ public class FieldSearch {
 	this.D = d;  
     }
 	
-  public String[] findEquals(Field f) {
-	byte[] key = f.toBytes();
-	Node p = D.fetch(key);
-	if (p == null) return new String[0];
-	String[] R = new String[p.Identifiers.size()];
-	R = p.Identifiers.toArray(R);
+  public String[] findEquals(Field f) throws IOException {
+	ArrayList<String> p = D.fetch(f);
+	String[] R = new String[p.size()];
+	R = p.toArray(R);
 	return R;
     }
   }
