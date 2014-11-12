@@ -29,14 +29,6 @@ public class KeyStorage {
 		node.addr = area;
 		DiskSpace.write(node,area);
 	}
-	protected void write(ValueNode node, int area) throws IOException{
-		if(area == -1)
-			// Writing a dummy node, do nothing
-			return;
-		
-		node.addr = area;
-		DiskSpace.write(node,area);
-	}
 	
 	public KeyNode add(Field f) throws IOException{return add(f,null);} // For backward compatibility	
 	public KeyNode add(Field f, String id) throws IOException{
@@ -49,8 +41,9 @@ public class KeyStorage {
 		int addr = Allocate.allocate();
 		ValueNode vnode = new ValueNode(id);
 		int addr2 = Allocate.allocate();
+		vnode.addr = addr2;
 		node.value = addr2;
-		write(vnode, addr2);
+		DiskSpace.write(vnode, addr2);
 		write(node, addr);
 		
 		one.prev = addr;
