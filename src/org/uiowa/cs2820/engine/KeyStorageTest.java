@@ -33,7 +33,7 @@ public class KeyStorageTest {
 	@Test
 	public void testAdd() throws IOException{
 		ks.add(f1);
-		ks.add(f2);
+		ks.add(f2,"soemID");
 		ks.add(f3);
 		
 		ArrayList<Field> keys = ks.getKeys();
@@ -56,7 +56,7 @@ public class KeyStorageTest {
 	public void testKey() throws IOException{
 		ks.add(f1);
 		assertNotNull(ks.key(f1));
-		assertNotNull(ks.key(f2));
+		assertNotNull(ks.key(f2,"someID"));
 		assertEquals(2,ks.getKeys().size());
 	}
 	

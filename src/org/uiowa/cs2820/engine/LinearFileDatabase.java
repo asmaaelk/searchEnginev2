@@ -19,7 +19,7 @@ public class LinearFileDatabase implements Database {
 	}
 
 	public void store(Field key, String id) throws IOException {
-		ks.key(key).getValueStorage().add(id);
+		ks.key(key,id).getValueStorage().add(id);
 	}
 
 }

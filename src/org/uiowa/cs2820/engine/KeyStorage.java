@@ -29,13 +29,9 @@ public class KeyStorage {
 		node.addr = area;
 		DiskSpace.write(node,area);
 	}
-	protected int write(KeyNode node) throws IOException{
-		int addr = Allocate.allocate();
-		write(node,addr);
-		return addr;
-	}
 	
-	public KeyNode add(Field f) throws IOException{
+	public KeyNode add(Field f) throws IOException{return add(f,null);} // For backward compatibility	
+	public KeyNode add(Field f, String id) throws IOException{
 		if(f == null) throw new IllegalArgumentException("KeyNode.add(): field cannot be null");
 		
 		KeyNode zero = read(0);
@@ -43,6 +39,11 @@ public class KeyStorage {
 		
 		KeyNode node = new KeyNode(f,0,zero.next);
 		int addr = Allocate.allocate();
+		ValueNode vnode = new ValueNode(id);
+		int addr2 = Allocate.allocate();
+		vnode.addr = addr2;
+		node.value = addr2;
+		DiskSpace.write(vnode, addr2);
 		write(node, addr);
 		
 		one.prev = addr;
@@ -66,11 +67,12 @@ public class KeyStorage {
 		return null;
 	}
 	
-	public KeyNode key(Field f) throws IOException{
+	public KeyNode key(Field f) throws IOException{return key(f,null);} // For backward compatibility
+	public KeyNode key(Field f, String id) throws IOException{
 		if(f == null) throw new IllegalArgumentException("KeyNode.key(): field cannot be null");
 		
 		KeyNode node = find(f);
-		if(node == null) return add(f);
+		if(node == null) return add(f,id);
 		else return node;
 	}
 	
