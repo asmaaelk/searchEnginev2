@@ -15,21 +15,64 @@ import java.io.IOException;
 public class Checkpoint {	
 	static File file;
     public static void save(Object obj) throws IOException, FileNotFoundException{
-    	if (file.exists() == false){file = new File("checkpoint_file");}
-    	byte[] buffer = Field.convert(obj);    	
-    	FileOutputStream f = new FileOutputStream(file);
-    	f.write(buffer);
-		f.close();    	
+    	byte[] buffer = Field.convert(obj);
+    	file = new File("checkpoint_file");    		
+    	FileOutputStream fos = null;
+    	try {    			
+    		fos = new FileOutputStream(file);    			
+    		fos.write(buffer);
+    	}
+    	catch (FileNotFoundException e) {
+    		System.out.println("File not found" + e);
+    	}
+    	catch (IOException ioe) {
+    		System.out.println("Exception while writing file " + ioe);
+    	}
+    	finally {
+    		try {
+    			if (fos != null) {
+    				fos.close();
+    			}
+    		}
+    		catch (IOException ioe) {
+    			System.out.println("Error while closing stream: " + ioe);
+    		}
+    	}    	   	
     }
     
     public static Object restore() throws IOException, FileNotFoundException{    	
-    	if (file.exists() == false) {file = new File("checkpoint_file");}    	
-    	FileInputStream f = new FileInputStream(file);
-    	byte[] buffer = new byte[(int) file.length()];
-    	f.read(buffer);
-    	f.close();
-    	Object theobject = Field.revert(buffer);
-    	return theobject;
-    }
+    	FileInputStream fis = null;
+    	try{
+	    	fis = new FileInputStream(file);
+	    	byte[] buffer = new byte[(int) file.length()];
+	    	fis.read(buffer);	    	
+	    	Object theobject = Field.revert(buffer);
+	    	return theobject;
+    	}
+    	catch (FileNotFoundException e) {
+    		System.out.println("File not found" + e);
+    	}
+    	catch (IOException ioe) {
+    		System.out.println("Exception while writing file " + ioe);
+    	}
+    	finally {
+    		try {
+    			if (fis != null) {
+    				fis.close();
+    			}
+    		}
+    		catch (IOException ioe) {
+    			System.out.println("Error while closing stream: " + ioe);
+    		}
+    	}return 0;    	   	
+    }    
+}    
+    
+    		
 
-}
+    		
+    	
+
+    
+
+

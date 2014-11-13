@@ -17,14 +17,20 @@ public class Allocate{
 	
 	public static void allocate(int area) throws IOException{
 		theBitSet.set(area);
+		Checkpoint.save(theBitSet);
 		
 		
 		
 	}
 	public static void free(int area) throws IOException{
 		theBitSet.clear(area);
+		Checkpoint.save(theBitSet);
 		
 	}
+	
+	
+	
+	
 	
 	//methods used in testing
 	public static boolean getValue(int arg0){
@@ -32,5 +38,8 @@ public class Allocate{
 	}	
 	public static void setBit(int arg0, boolean value){
 		theBitSet.set(arg0, value);
+	}
+	public static BitSet getBitSet(){
+		return theBitSet;
 	}
 }
