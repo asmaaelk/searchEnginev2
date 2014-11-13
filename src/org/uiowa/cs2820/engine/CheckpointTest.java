@@ -12,10 +12,9 @@ public class CheckpointTest {
 
 	@Test
 	public void testBoth() throws FileNotFoundException, IOException {
-		
-		Object a = "hello";
-		Checkpoint.save(a);
-		assertEquals(a,Checkpoint.restore());		
+			
+		Checkpoint.save("hello");
+		assertEquals("hello",Checkpoint.restore());		
 	}
 
 }
