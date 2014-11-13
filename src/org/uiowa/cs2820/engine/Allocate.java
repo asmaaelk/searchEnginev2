@@ -17,20 +17,13 @@ public class Allocate{
 	
 	public static void allocate(int area) throws IOException{
 		theBitSet.set(area);
-		restoreSave();
+		
+		
 		
 	}
 	public static void free(int area) throws IOException{
 		theBitSet.clear(area);
-		restoreSave();
-	}
-	
-	//makes changes to the file from allocate and free	
-	public static void restoreSave() throws IOException{
-		Object fileObject = Checkpoint.restore();
-		BitSet fileBitSet = (BitSet) fileObject;		
-		fileBitSet = theBitSet;		
-		Checkpoint.save(fileBitSet);		
+		
 	}
 	
 	//methods used in testing
