@@ -17,15 +17,15 @@ public class Allocate{
 	
 	public static void allocate(int area) throws IOException{
 		theBitSet.set(area);
-		saveRestore();
+		restoreSave();
 		
 	}
 	public static void free(int area) throws IOException{
 		theBitSet.clear(area);
-		saveRestore();
+		restoreSave();
 	}
 	
-	public static void saveRestore() throws IOException{
+	public static void restoreSave() throws IOException{
 		Object fileObject = Checkpoint.restore();
 		BitSet fileBitSet = (BitSet) fileObject;		
 		fileBitSet = theBitSet;		
