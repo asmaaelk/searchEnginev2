@@ -15,7 +15,7 @@ public class KeyStorage {
 	
 	protected KeyNode read(int area) throws IOException{
 		if(area == -1)
-			// Returns a dummy node that eases programming latter
+			// Returns a dummy node that eases programming later
 			return new KeyNode(null);
 		
 		return (KeyNode)DiskSpace.read(area);

@@ -1,36 +1,38 @@
-/*SOURCE:
-    http://examples.javacodegeeks.com/core-java/io/randomaccessfile/java-randomaccessfile-example/
-*/
 package org.uiowa.cs2820.engine;
 
 import java.io.IOException;
 import java.io.File;
 import java.io.RandomAccessFile;
 
-/*
-This is a working IMPLEMENTATION from link provided at top. 
-To implement, change the filepath as needed.*/
-
 public class DiskSpace {
-	private static File file;
-	private static String filePath;
+	RandomAccessFile someFile;
+	public DiskSpace(String filePath) throws FileNotFoundException{
+		if (!file.exists()) {
+			file.createNewFile()//Lets be sure we even have a file :)
+			System.out.println("file created");
+		}
+		this.someFile = new RandomAccessFile(filePath, "rw");
+	}
 
-	public static byte[] read(long area) throws IOException{
-		
-		RandomAccessFile randFile = new RandomAccessFile(filePath, "rw");
+	public byte[] read( long area ) throws IOException{
+	/*Basic read() from file; uses */		
 		byte[] bytes = new byte[DiskSpace.getFileSize()];
-		randFile.seek(area*1024);
-		randFile.readFully(bytes);
-		randFile.close();
+		someFile.seek( area*1024 ); //What if this is to big?
+		someFile.readFully( bytes );
+		someFile.close();
 		return bytes;
 		
 	}
 
 	public static void write(Object O, long area) throws IOException{
-		RandomAccessFile file = new RandomAccessFile(filePath, "rw");
-		file.seek(area*1024);
-		//file.write(data.getBytes());
-		file.close();
+		//someFile declared above
+		someFile.seek( getFileSize() );
+		someFile.write( o.getBytes() ); //We have a getBytes() method somewhere, righ?!
+/* 
+  *The object is what we are writing to file. 
+ * Is there a getBytes method that works here?
+ */ 
+		someFile.close();
 
 	}
 	//End write
