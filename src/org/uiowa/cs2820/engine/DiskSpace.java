@@ -7,7 +7,7 @@ import java.io.RandomAccessFile;
 public class DiskSpace {
 	RandomAccessFile someFile;
 	public DiskSpace(String filePath) throws FileNotFoundException{
-		this.someFile = new RandomAccessFile(filename, "rw");
+		this.someFile = new RandomAccessFile(filePath, "rw");
 	}
 
 	public byte[] read(long area) throws IOException{
