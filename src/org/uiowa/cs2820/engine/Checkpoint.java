@@ -13,12 +13,12 @@ public class Checkpoint {
 
     public static void save(Object obj) throws IOException{
     	byte[] buffer = Field.convert(obj);
-    	Files.write(Paths.get("target-file"), buffer);
+    	Files.write(Paths.get("checkpoint_file"), buffer);
     	
     	
     }
-    public static Object restore(String filename) throws IOException{
-    	Path path = Paths.get(filename);
+    public static Object restore() throws IOException{
+    	Path path = Paths.get("checkpoint_file");
     	byte [] buffer = Files.readAllBytes(path);
     	Object theobject = Field.revert(buffer);
     	return theobject;

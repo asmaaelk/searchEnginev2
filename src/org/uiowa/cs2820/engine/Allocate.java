@@ -1,5 +1,6 @@
 package org.uiowa.cs2820.engine;
 
+import java.io.IOException;
 import java.util.BitSet;
 //andrew hoch
 //0 free
@@ -8,17 +9,26 @@ import java.util.BitSet;
 public class Allocate{
 	private static BitSet theBitSet = new BitSet();
 	
-	public static int allocate(){
-		int firstzero =  theBitSet.nextClearBit(0);
+	
+	public static int allocate() throws IOException{
+		int firstzero =  theBitSet.nextClearBit(0);		
 		return firstzero;
 	}
 	
-	public static void allocate(int area){
+	public static void allocate(int area) throws IOException{
 		theBitSet.set(area);
+		saveRestore();
 		
 	}
-	public static void free(int area){
+	public static void free(int area) throws IOException{
 		theBitSet.clear(area);
-		return;
+		saveRestore();
+	}
+	
+	public static void saveRestore() throws IOException{
+		Object fileObject = Checkpoint.restore();
+		BitSet fileBitSet = (BitSet) fileObject;		
+		fileBitSet = theBitSet;		
+		Checkpoint.save(fileBitSet);		
 	}
 }
