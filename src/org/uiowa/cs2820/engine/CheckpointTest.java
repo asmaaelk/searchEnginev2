@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class checkpointTest {
+public class CheckpointTest {
 
 	@Test
 	public void testSave() {

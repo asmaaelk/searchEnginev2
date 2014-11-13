@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 //andrew hoch
 
-public class checkpoint {
+public class Checkpoint {
 
     public static void save(Object obj) throws IOException{
     	byte[] buffer = Field.convert(obj);
