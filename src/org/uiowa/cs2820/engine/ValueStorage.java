@@ -31,12 +31,20 @@ public class ValueStorage implements Value{
 		ValueNode n = new ValueNode(identifier);
 		 //Allocate.allocate();
 		ValueNode temp = DiskSpace.read(head);
+		boolean addNode = true;
 		while(temp.next != -1) {
 			temp = DiskSpace.read(temp.next);
+			if (temp.identifier == identifier) {
+				addNode = false;
+				break;
+			}
 		}
-		temp.next = Allocate.allocate();
-		n.addr = temp.next;
-		DiskSpace.write(n, temp.next);
-		DiskSpace.write(temp, temp.addr);
+		if(addNode) 
+		{
+			temp.next = Allocate.allocate();
+			n.addr = temp.next;
+			DiskSpace.write(n, temp.next);
+			DiskSpace.write(temp, temp.addr);
+		}
 	}
 }
