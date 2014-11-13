@@ -27,7 +27,7 @@ public class DiskSpace {
 	public static void write(Object O, long area) throws IOException{
 		//someFile declared above
 		someFile.seek( getFileSize() );
-		someFile.write( o.getBytes() );
+		someFile.write( o.getBytes() ); //We have a getBytes() method somewhere, righ?!
 /* 
   *The object is what we are writing to file. 
  * Is there a getBytes method that works here?
