@@ -11,7 +11,9 @@ public class ValueStorage implements Value{
 	
 	public ValueStorage(int h){head = h;}
 	
-	public ArrayList<String> load(long id) throws IOException{
+	//returns a list of identifiers as an ArrayList of strings
+	//associated with a field
+	public ArrayList<String> load() throws IOException{
 		ArrayList<String> nL = new ArrayList<String>();
 		//KeyNode docName = DiskSpace.read(id);
 		ValueNode temp = DiskSpace.read(head);
@@ -24,8 +26,13 @@ public class ValueStorage implements Value{
 		{
 			System.out.println(nL.get(i));
 		}
+		return nL;
 	}
-
+	
+	//add takes as input an identifier
+	//creates a new value node
+	//and adds it as a value node associated with a key node
+	//also points to next node
 	public void add(String identifier) throws IOException {
 		//finds free space
 		ValueNode n = new ValueNode(identifier);
@@ -34,13 +41,13 @@ public class ValueStorage implements Value{
 		boolean addNode = true;
 		while(temp.next != -1) {
 			temp = DiskSpace.read(temp.next);
+			//make sure we are not duplicating nodes
 			if (temp.identifier == identifier) {
 				addNode = false;
 				break;
 			}
 		}
-		if(addNode) 
-		{
+		if(addNode) {
 			temp.next = Allocate.allocate();
 			n.addr = temp.next;
 			DiskSpace.write(n, temp.next);
