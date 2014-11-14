@@ -10,11 +10,10 @@ public class AllocateTest {
 
 	@Test
 	public void testAllocate() throws IOException {
-		Allocate.setBit(0, true);
-		Allocate.setBit(1, true);
-		Allocate.setBit(2, true);
-		Allocate.setBit(3, true);
-		assertEquals(Allocate.allocate(), 4);		
+		Allocate.allocate();
+		Allocate.allocate();
+		assertEquals(Allocate.allocate(), 2);
+		assertEquals(Allocate.getValue(2),true);
 	}
 
 	@Test
