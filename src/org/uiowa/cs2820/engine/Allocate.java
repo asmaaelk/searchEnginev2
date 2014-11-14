@@ -11,8 +11,9 @@ public class Allocate{
 	
 	
 	public static int allocate() throws IOException{
-		int firstzero =  theBitSet.nextClearBit(0);		
-		return firstzero;
+		int nextfree =  theBitSet.nextClearBit(0);
+		theBitSet.set(nextfree);
+		return nextfree;
 	}
 	
 	public static void allocate(int area) throws IOException{
