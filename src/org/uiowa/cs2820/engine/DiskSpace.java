@@ -22,20 +22,38 @@ public class DiskSpace {
 		someFile.close();
 		return bytes;
 		
-	}
+	}//End read
 
-	public static void write(Object O, long area) throws IOException{
+	public static void write(Object o, long area) throws IOException{
 		//someFile declared above
 		someFile.seek( getFileSize() );
-		someFile.write( o.getBytes() ); //We have a getBytes() method somewhere, righ?!
-/* 
-  *The object is what we are writing to file. 
- * Is there a getBytes method that works here?
- */ 
+		someFile.write( convert(o) );
+		revert(o);
 		someFile.close();
+	}//End write
 
-	}
-	//End write
+	public static Object revert(byte[] seq) {
+		Object O = null; // default value
+		try {
+			ByteArrayInputStream M = new ByteArrayInputStream(seq);
+			ObjectInputStream N = new ObjectInputStream(M);
+			O = N.readObject();
+		}
+		catch (Exception e) { return null };//Shouldn't happen
+		return O;
+	}//End revert
+	
+	public static byte[] convert(Object O) {
+	// private method converts objects into byte array
+		ByteArrayOutputStream M = new ByteArrayOutputStream();
+		ObjectOutput N = null;
+		try {
+			N = new ObjectOutputStream(M);
+			N.writeObject(O);
+		}
+		catch (IOException e) {return null;} // wrong, but should not happen
+		return M.toByteArray();
+	}//End convert
 	
 	public static int getFileSize() {
 		int fileSize = (int) file.length();
