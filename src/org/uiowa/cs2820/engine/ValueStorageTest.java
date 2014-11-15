@@ -5,11 +5,13 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.junit.Test;
 
 public class ValueStorageTest {
 	
 	public ValueStorage vs;
-
+	
+	@Test
 	public void testValStor() throws IOException {
 		vs = new ValueStorage(1);
 		vs.add("six");
